@@ -1,5 +1,0 @@
-HelloWorld ... or something like that
-	~~Adam C
-
-Now with a new line !!
-	~~Adam C
