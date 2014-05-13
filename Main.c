@@ -8,7 +8,6 @@
 
 task main()
 {
-
 forward(3.25);
 
 turn('l', 1);
@@ -22,7 +21,4 @@ forward(6.5);
 turn('l', 1);
 
 backwards(3.25);
-
-
-
 }
