@@ -5,35 +5,37 @@ int A=0;
 
 task One()
 {
-  while(true)
-  {
-    int A=A+1;
-    wait1Msec(15);
-  }
+	while(true)
+	{
+		A=A+1;
+		wait1Msec(75);
+	}
 }
 
 
 task Two()
 {
-  while(A < 25)
-  {
-    motor[Left] = 100;
-    motor[Right] = 100;
-    wait1Msec(75);
-  }
+	while(A <= 25)
+	{
+		motor[Left] = 100;
+		motor[Right] = 100;
+		wait1Msec(75);
+	}
+	motor[Left] = 0;
+	motor[Right] = 0;
 }
 
 
 
 task main()
 {
-  startTask(One);   /* Comment out either of these two lines */
-  startTask(Two);   /* to see a Task running individually.   */
+	startTask(One);   /* Comment out either of these two lines */
+	startTask(Two);   /* to see a Task running individually.   */
 
-  while(true)
-  {
-  	wait1Msec(1);
-    // Keep the program alive
-  }
+	while(true)
+	{
+		wait1Msec(1);
+		// Keep the program alive
+	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
