@@ -1,3 +1,5 @@
+#pragma config(Sensor, dgtl7,  rightenc,       sensorQuadEncoder)
+#pragma config(Sensor, dgtl9,  leftenc,        sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, sonar,          sensorSONAR_cm)
 #pragma config(Motor,  port2,           right,         tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port3,           left,          tmotorServoContinuousRotation, openLoop, reversed)
@@ -12,13 +14,13 @@ task main()
 
 		if(SensorValue[sonar] <= 35){
 
-			motor(right) = -127;
-			motor(left) = -127;
-			wait1Msec(100*4);
+		  SensorValue[rightEncoder] = 0;
+      SensorValue[leftEncoder]  = 0;
 
-			motor(right) = 127;
-			motor(left) = -127;
-			wait1Msec(100*5);
+		while(SensorValue[rightenc] <= 1080 && SensorValue[leftenc] <= 1080){
+			motor(right) = 127
+			motor(left) = -127
+	}
 		}
 	}
 
