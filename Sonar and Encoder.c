@@ -14,15 +14,25 @@ task main()
 
 		if(SensorValue[sonar] <= 35){
 
-		  SensorValue[rightEncoder] = 0;
-      SensorValue[leftEncoder]  = 0;
+			SensorValue[rightenc] = 0;
+			SensorValue[leftenc]  = 0;
 
-		while(SensorValue[rightenc] <= 1080 && SensorValue[leftenc] <= 1080){
-			motor(right) = 127
-			motor(left) = -127
-	}
+			if(SensorValue[rightenc] <= 360){
+				motor(right) = 127;
+				wait1Msec(75);
+			}
+
+			if(SensorValue[leftenc] <= 360){
+				motor(left) = -127;
+				wait1Msec(75);
+			}
+			/*
+			while(SensorValue[rightenc] >= 360 && SensorValue[leftenc] >= 360){
+			motor(right) = 127;
+			motor(left) = -127;
+			}
+			}
+			*/
 		}
 	}
-
-
 }
