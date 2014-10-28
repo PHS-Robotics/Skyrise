@@ -28,7 +28,15 @@ void pre_auton()
 
 task autonomous()
 {
-	// go forward;
+	// forward
+while(true)
+{
+
+
+}
+// grab cube
+// back
+// put cube on small post
 
 	AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
 }
