@@ -23,22 +23,36 @@
 
 void pre_auton()
 {
-	int distance1;
+	int autoforwardvalue;
 }
 
 task autonomous()
 {
 	// forward
-while(true)
-{
+	while(true)
+	{
+		int autoforwardvalue;
+		autoforwardvalue = 127;
+		// foward
+		top:
+		motor[right1] = (autoforwardvalue);
+		motor[right2] = autoforwardvalue;
+		motor[left1] = autoforwardvalue;
+		motor[left2] = autoforwardvalue;
+	}
+	wait1Msec(50);
+	if(SensorValue(wheelr) <= 60 && SensorValue(wheell) <= 60){
+		goto grab_cube;
+	}
+grab_cube:
+	// grab cube
+	//turn 180
+	// back
+autoforwardvalue = -127;
+goto top;
+	// put cube on small post
 
-
-}
-// grab cube
-// back
-// put cube on small post
-
-	AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
+	// AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
 }
 
 
@@ -52,6 +66,7 @@ task usercontrol()
 	{
 		motor[right1] = vexRT[Ch1] - vexRT[Ch2];
 		motor[right2] = vexRT[Ch1] - vexRT[Ch2];
+
 		motor[left1] = vexRT[Ch1] + vexrt[Ch2];
 		motor[left2] = vexRT[Ch1] + vexrt[Ch2];
 
