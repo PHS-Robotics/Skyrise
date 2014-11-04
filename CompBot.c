@@ -20,36 +20,66 @@
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 // this is the code for the compitition robot --Adam C.
 
+#include"motors.h"
 
 void pre_auton()
 {
-	int autoforwardvalue;
+	SensorValue(wheelr) = 0;
+	SensorValue(wheell) = 0;
 }
 
 task autonomous()
 {
+	int autoforwardvalue;
+	autoforwardvalue = 127;
+
+
 	// forward
 	while(true)
 	{
-		int autoforwardvalue;
-		autoforwardvalue = 127;
+
 		// foward
-		top:
-		motor[right1] = (autoforwardvalue);
-		motor[right2] = autoforwardvalue;
-		motor[left1] = autoforwardvalue;
-		motor[left2] = autoforwardvalue;
+	motors(autoforwardvalue, autoforwardvalue);
+		wait1Msec(50);
+
+		if(SensorValue(wheelr) <= 60 && SensorValue(wheell) <= 60){
+			goto grab_cube;
+		}
 	}
-	wait1Msec(50);
-	if(SensorValue(wheelr) <= 60 && SensorValue(wheell) <= 60){
-		goto grab_cube;
-	}
+
 grab_cube:
+	int x;
+	x = 1;
+
 	// grab cube
+
+
 	//turn 180
+	while(x == 1){
+		if(SensorValue(wheelr) > 120){
+			motors(127, 0);
+			wait1Msec(50);
+			if(SensorValue(wheelr) > 120 && SensorValue(wheell) > 127){
+				break;
+			}
+
+		}
+		if(SensorValue(wheell) > 127){
+			motors(0, 127);
+			wait1Msec(50);
+			if(SensorValue(wheelr) > 120 && SensorValue(wheell) > 127){
+				break;
+			}
+		}
+
+	}
+
 	// back
-autoforwardvalue = -127;
-goto top;
+
+	autoforwardvalue = -127;
+	goto top;
+
+
 	// put cube on small post
 
 	// AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
@@ -64,11 +94,11 @@ task usercontrol()
 	// -- Adam C.
 	while (true)
 	{
-		motor[right1] = vexRT[Ch1] - vexRT[Ch2];
-		motor[right2] = vexRT[Ch1] - vexRT[Ch2];
+		motor[right1] = vexRT(Ch1) - vexRT[Ch2];
+		motor[right2] = vexRT(Ch1) - vexRT[Ch2];
 
-		motor[left1] = vexRT[Ch1] + vexrt[Ch2];
-		motor[left2] = vexRT[Ch1] + vexrt[Ch2];
+		motor[left1] = vexRT(Ch1) + vexRT[Ch2];
+		motor[left2] = vexRT(Ch1) + vexRT[Ch2];
 
 		motor[lift1] = vexRT[Ch3];
 		motor[lift2] = -vexRT[Ch3];
