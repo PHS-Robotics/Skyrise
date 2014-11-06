@@ -20,7 +20,7 @@
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 // this is the code for the compitition robot --Adam C.
 
-#include"motors.h"
+#include"RoboHeader.h"
 
 void pre_auton()
 {
@@ -30,59 +30,47 @@ void pre_auton()
 
 task autonomous()
 {
-	int autoforwardvalue;
-	autoforwardvalue = 127;
+	// values
+	int forward = 180;
+	int timetotop = 200;
+	int OETurn = 180;
+	int clawop = 1*10;
 
-
-	// forward
 	while(true)
 	{
-
 		// foward
-	motors(autoforwardvalue, autoforwardvalue);
-		wait1Msec(50);
+		turnbot(forward, 127, 127);
 
-		if(SensorValue(wheelr) <= 60 && SensorValue(wheell) <= 60){
-			goto grab_cube;
-		}
+		// grab cube
+		motor(claw) =127;
+		wait1Msec(clawop);
+		motor(claw) = 0;
+
+		//turn 180
+		turnbot(OETurn, 127, -127);
+
+		// back
+		turnbot(forward, 127, 127);
+
+		// put cube on small post
+		// turn 90*
+		turnbot(90, -127, 127);
+		// Put lift to top
+		lift(127);
+		wait1Msec(timetotop);
+		// move base forward a little than stop base
+		motors(127,127);
+		wait1Msec(10);
+		motors(0,0);
+		// open claw
+		motor(claw) = -127;
+		wait1Msec(clawop);
+		motor(claw) = 0;
+		// lower lift
+		lift(-127);
+		wait1Msec(timetotop);
+		// AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
 	}
-
-grab_cube:
-	int x;
-	x = 1;
-
-	// grab cube
-
-
-	//turn 180
-	while(x == 1){
-		if(SensorValue(wheelr) > 120){
-			motors(127, 0);
-			wait1Msec(50);
-			if(SensorValue(wheelr) > 120 && SensorValue(wheell) > 127){
-				break;
-			}
-
-		}
-		if(SensorValue(wheell) > 127){
-			motors(0, 127);
-			wait1Msec(50);
-			if(SensorValue(wheelr) > 120 && SensorValue(wheell) > 127){
-				break;
-			}
-		}
-
-	}
-
-	// back
-
-	autoforwardvalue = -127;
-	goto top;
-
-
-	// put cube on small post
-
-	// AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
 }
 
 
@@ -94,15 +82,10 @@ task usercontrol()
 	// -- Adam C.
 	while (true)
 	{
-		motor[right1] = vexRT(Ch1) - vexRT[Ch2];
-		motor[right2] = vexRT(Ch1) - vexRT[Ch2];
+		motors(vexRT(Ch1) - vexRT[Ch2],vexRT(Ch1) + vexRT[Ch2]);
+		lift(vexRT(Ch3));
 
-		motor[left1] = vexRT(Ch1) + vexRT[Ch2];
-		motor[left2] = vexRT(Ch1) + vexRT[Ch2];
-
-		motor[lift1] = vexRT[Ch3];
-		motor[lift2] = -vexRT[Ch3];
-
+		// Claw control
 		if( vexRT(Btn5U) == 1 ){
 			motor[claw] = 127;
 		}
@@ -112,9 +95,6 @@ task usercontrol()
 		else if(vexRT(Btn5D) == 0 || vexRT(Btn5D) == 0){
 			motor[claw] = 0;
 		}
-
-
-
-		UserControlCodePlaceholderForTesting(); // Remove this function call once you have "real" code.
+		//				UserControlCodePlaceholderForTesting(); // Remove this function call once you have "real" code.
 	}
 }
