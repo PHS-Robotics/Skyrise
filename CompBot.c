@@ -31,9 +31,9 @@ void pre_auton()
 task autonomous()
 {
 	// values
-	int forward = 180;
+	int forward = 360*1;
 	int timetotop = 200;
-	int OETurn = 180;
+	int OETurn = 360*2;
 	int clawop = 1*10;
 
 	while(true)
