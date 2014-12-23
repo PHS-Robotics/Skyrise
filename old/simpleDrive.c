@@ -1,5 +1,5 @@
-#pragma config(Sensor, dgtl2,  wheelr,         sensorQuadEncoder)
-#pragma config(Sensor, dgtl4,  wheell,         sensorQuadEncoder)
+#pragma config(Sensor, dgtl2,  wheell,         sensorQuadEncoder)
+#pragma config(Sensor, dgtl4,  wheelr,         sensorQuadEncoder)
 #pragma config(Sensor, dgtl6,  ultrasonic,     sensorSONAR_cm)
 #pragma config(Motor,  port2,           right1,        tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port3,           right2,        tmotorServoContinuousRotation, openLoop)
@@ -24,77 +24,62 @@
 
 void pre_auton()
 {
-	SensorValue(wheelr) = 0;
-	SensorValue(wheell) = 0;
+ bStopTasksBetweenModes = true;
 }
 
 task autonomous()
 {
-	// values
-	int forward = 360*1;
-	int timetotop = 200;
-	int OETurn = 360*2;
-	int clawop = 1*10;
 
-	while(true)
-	{
-		// foward
-		turnbot(forward, 127, 127);
-
-		// grab cube
-		motor(claw) =127;
-		wait1Msec(clawop);
-		motor(claw) = 0;
-
-		//turn 180
-		turnbot(OETurn, 127, -127);
-
-		// back
-		turnbot(forward, 127, 127);
-
-		// put cube on small post
-		// turn 90*
-		turnbot(90, -127, 127);
-		// Put lift to top
-		lift(127);
-		wait1Msec(timetotop);
-		// move base forward a little than stop base
-		motors(127,127);
-		wait1Msec(10);
-		motors(0,0);
-		// open claw
-		motor(claw) = -127;
-		wait1Msec(clawop);
-		motor(claw) = 0;
-		// lower lift
-		lift(-127);
-		wait1Msec(timetotop);
-		// AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
-	}
 }
-
 
 task usercontrol()
 {
 	// this is the user controled code the right joystick is the drive control
 	// the left joystick (up and down) is the lift control
-	// 5U and 5D are the claw control
+	// 5U and 5D are the claw comotor
 	// -- Adam C.
 	while (true)
 	{
-		motors(vexRT(Ch1) - vexRT[Ch2],vexRT(Ch1) + vexRT[Ch2]);
-		lift(vexRT(Ch3));
+	//	motors(	(vexRT(Ch1) + vexRT[Ch2]) , (vexRT(Ch1) - vexRT[Ch2]));
 
-		// Claw control
+		motors((vexRT(ch2)),(vexRT(ch3)));
+		/*
+		motor(right1) = -vexRT(Ch2);
+		motor(right2) = vexRT(Ch2);
+		motor(left1) = -vexRT(Ch3);
+		motor(left2) = vexRT(Ch3);
+		*/
+
 		if( vexRT(Btn5U) == 1 ){
 			motor[claw] = 127;
 		}
 		else if(vexRT(Btn5D) == 1){
 			motor[claw] = -127;
 		}
-		else if(vexRT(Btn5D) == 0 || vexRT(Btn5D) == 0){
+		else {
 			motor[claw] = 0;
 		}
-		//				UserControlCodePlaceholderForTesting(); // Remove this function call once you have "real" code.
+
+
+		if( vexRT(Btn7U) == 1 ){
+			motor[lift2] = 127;
+		}
+		else if(vexRT(Btn7D) == 1){
+			motor[lift2] = -127;
+		}
+		else {
+			motor[lift2] = 0;
+		}
+
+
+		if( vexRT(Btn8U) == 1 ){
+			motor[lift1] = 127;
+		}
+		else if(vexRT(Btn8D) == 1){
+			motor[lift1] = -127;
+		}
+		else {
+			motor[lift1] = 0;
 	}
+}
 }
