@@ -3,12 +3,12 @@
 
 int lift(int right, int left){
 
-motor(LiftR1) = right;
-motor(LiftR2) = right;
+	motor(LiftR1) = right;
+	motor(LiftR2) = right;
 
-motor(LiftL1)= left;
-motor(LiftL2)= left;
+	motor(LiftL1)= left;
+	motor(LiftL2)= left;
 
-return 0;
+	return 0;
 }
 #endif
