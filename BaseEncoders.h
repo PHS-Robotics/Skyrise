@@ -40,9 +40,10 @@ int DriveENC(char WhatToDo, int Power, int DistOrAng){
 		}
 		if( !(SensorValue[RightEnc] <= DisOrAng && SensorValue[LeftENC] <= DistOrAngle) )
 		{
-			break;
+			break; //Goto BreakPoint1;
 		}
 	}
+	// BreakPoint1:
 	while(SensorValue[RightEnc] <= DisOrAng || SensorValue[LeftENC] <= DistOrAngle)
 	{
 		// if one wheel is less turns than the other this code is supposed to fix that
@@ -58,8 +59,9 @@ int DriveENC(char WhatToDo, int Power, int DistOrAng){
 		}
 		if( !(SensorValue[RightEnc] <= DisOrAng && SensorValue[LeftENC] <= DistOrAngle) )
 		{
-			break;
+			break; // goto BreakPoint2;
 		}
+		// BreakPoint2:
 		ClearBaseEncoders();
 		return 0;
 

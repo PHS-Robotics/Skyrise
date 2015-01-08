@@ -6,26 +6,24 @@ int LiftMotorRevsToTop = 360*5;
 int LiftTimeToTop = 50;
 int WheelSize = 5;
 bool isLiftTop = FALSE;
+
+
+// Not a Fuse
+bool isAutoEnabled == FALSE;
+
 task main()
 {
+	// Turn me into a compitition template!!!!!!
 	while(1 != 0)
 	{
-
-		base( (vexRT(Ch2)) , (vexRT(Ch3)) );
-
-		if(vexRT(Btn5U) == 1)
+		if(isAUtoEnabled == FALSE)
 		{
-			lift(127,127);
+			#include "ManualControlCode.c"
+			// #include"ManualControlCodeBETA.c"
 		}
-		else if( vexRT(Btn5D) ==1)
+		if(isAutoEnabled == TRUE)
 		{
-			lift(-127,-127);
+			#include "AutoCode.c"
 		}
-		else
-		{
-			lift(0,0);
-		}
-
-		// TODO add code for lift top and lift bottom and also add code for cube claw lift
 	}
 }
