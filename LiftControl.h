@@ -51,7 +51,7 @@ int LiftControl(bool UpOrDown)
 			}
 		}
 
-		{
+	}
 
 
 #endif
