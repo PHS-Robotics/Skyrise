@@ -13,9 +13,12 @@ but you can use any int var in lift();
 */
 
 int lift(int r, int l){
+	motor(LiftR1) = r;
+	motor(LiftR2)= r;
 
-	motor(right) = right;
-	motor(left)= left;
-	wait1Msec(50*10);
+	motor(LiftL1) = l;
+	motor(LiftL2) = l;
+
+	return 0;
 }
 #endif
