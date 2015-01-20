@@ -1,0 +1,11 @@
+// Changes By Adam
+
+Modifyed
+./Bkup/* to /Older Code
+./BackUp to /Older Code
+./old to /Older Code
+./Test to ./Adams Test Folder
+
+Added
+ChangeLog.txt
+Todo.txt
