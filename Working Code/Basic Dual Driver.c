@@ -1,9 +1,9 @@
 #pragma config(Sensor, dgtl1,  RightENC,       sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, LeftENC,        sensorQuadEncoder)
-#pragma config(Motor,  port2,           RightT,        tmotorServoContinuousRotation, openLoop, reversed)
-#pragma config(Motor,  port3,           RightB,        tmotorServoContinuousRotation, openLoop, reversed)
+#pragma config(Motor,  port2,           RightT,        tmotorServoContinuousRotation, openLoop)
+#pragma config(Motor,  port3,           RightB,        tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port4,           LeftT,         tmotorServoContinuousRotation, openLoop)
-#pragma config(Motor,  port5,           LeftB,         tmotorServoContinuousRotation, openLoop, reversed)
+#pragma config(Motor,  port5,           LeftB,         tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port6,           LiftR1,        tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port7,           LiftR2,        tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port8,           LiftL1,        tmotorServoContinuousRotation, openLoop)
@@ -13,23 +13,27 @@
 
 #include "Base.h"
 #include "lift.h"
+
 task main()
 {
 	while(1 != 0)
 	{
 		base( (vexRT(Ch2)), (vexRT(Ch3)) );
 
+
 		if( vexRT(Btn6UXmtr2) == 1)
 		{
-			lift(127,127);
+			lift(127);
 		}
 		if( vexRT(Btn6DXmtr2) == 1)
 		{
-			lift(-127,-127);
+			lift(-127);
 		}
 		else
 		{
-			lift(0,0);
+			lift(0);
 		}
+
+//	( vexRT(Btn6UXmtr2) == 1)? lift(127) : 	( vexRT(Btn6DXmtr2) == 1) ? lift(-127) : lift(0);
 	}
 }

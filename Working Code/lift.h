@@ -12,12 +12,12 @@ PS. you can only use one letter vars to exchange info from MAIN to .h files
 but you can use any int var in lift();
 */
 
-int lift(int r, int l){
-	motor(LiftR1) = r;
-	motor(LiftR2)= r;
+int lift(int l){
+	motor(LiftR1) = l;
+	motor(LiftR2)= l;
 
-	motor(LiftL1) = l;
-	motor(LiftL2) = l;
+	motor(LiftL1) = -l;
+	motor(LiftL2) = -l;
 
 	return 0;
 }

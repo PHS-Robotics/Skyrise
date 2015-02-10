@@ -15,7 +15,7 @@ but you can use any int var in base();
 int base(int r, int l){
 
 	motor(RightT) = r;
-	motor(RightB) = r;
+	motor(RightB) = -r;
 
 	motor(LeftT) = l;
 	motor(LeftB) = l;

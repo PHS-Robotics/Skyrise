@@ -21,15 +21,15 @@ task main()
 
 		if( vexRT(Btn6U) == 1)
 		{
-			lift(127,127);
+			lift(127);
 		}
 		if( vexRT(Btn6D) == 1)
 		{
-			lift(-127,-127);
+			lift(-127);
 		}
 		else
 		{
-			lift(0,0);
+			lift(0);
 		}
 	}
 }
